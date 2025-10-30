@@ -1,0 +1,58 @@
+{
+  "info": {
+    "name": "Siwic API - Basic",
+    "_postman_id": "siwic-quick",
+    "description": "Quick collection to test register/login and social callbacks (JSON responses).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Check username",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{server}}/user/check-user?value=testuser",
+          "host": ["{{server}}"],
+          "path": ["user", "check-user"],
+          "query": [{ "key": "value", "value": "testuser" }]
+        }
+      }
+    },
+    {
+      "name": "Register user",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"testuser@example.com\",\n  \"mobile\": \"9999999999\",\n  \"password\": \"Password123!\",\n  \"name\": \"Test User\"\n}"
+        },
+        "url": { "raw": "{{server}}/user/register", "host": ["{{server}}"], "path": ["user", "register"] }
+      }
+    },
+    {
+      "name": "Login user (identifier/password)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"identifier\": \"testuser\",\n  \"password\": \"Password123!\"\n}" },
+        "url": { "raw": "{{server}}/user/login", "host": ["{{server}}"], "path": ["user", "login"] }
+      }
+    },
+    {
+      "name": "Twitter fetch by username (public metrics)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{server}}/auth/twitter/fetch?username=twitterdev",
+          "host": ["{{server}}"],
+          "path": ["auth", "twitter", "fetch"],
+          "query": [{ "key": "username", "value": "twitterdev" }]
+        }
+      }
+    }
+  ],
+  "variable": [{ "key": "server", "value": "http://localhost:5000" }]
+}
